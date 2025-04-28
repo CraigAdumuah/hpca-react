@@ -1,33 +1,23 @@
-import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import { ThemeProvider } from './context/ThemeContext';
-import SignIn from './components/SignIn';
-import Register from './components/Register';
-import Dashboard from './components/Dashboard';
+// App.tsx
+import React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import signin from "./Screens/signin";
+import Register from "./Screens/Register";
+import Dashboard from "./Screens/Dashboard";
+import Settings from "./Screens/Settings";
 
-interface User {
-  name: string;
-}
+const Stack = createNativeStackNavigator();
 
-function App() {
-  const [user, setUser] = useState<User | null>(null);
-
+export default function App() {
   return (
-    <ThemeProvider>
-      <Router>
-        <nav className="navbar">
-          <Link to="/">Dashboard</Link>
-          {!user && <Link to="/signin">Sign In</Link>}
-          {!user && <Link to="/register">Register</Link>}
-        </nav>
-        <Routes>
-          <Route path="/" element={<Dashboard user={user} />} />
-          <Route path="/signin" element={<SignIn setUser={setUser} />} />
-          <Route path="/register" element={<Register setUser={setUser} />} />
-        </Routes>
-      </Router>
-    </ThemeProvider>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Signin">
+        <Stack.Screen name="signin" component={signin} options={{ headerShown: false }} />
+        <Stack.Screen name="Register" component={Register} options={{ headerShown: false }} />
+        <Stack.Screen name="Dashboard" component={Dashboard} options={{ headerShown: false }} />
+        <Stack.Screen name="Settings" component={Settings} options={{ headerShown: false }} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-
-export default App; 

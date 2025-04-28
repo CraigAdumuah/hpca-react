@@ -16,5 +16,12 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": ["src"]
-} 
+  "include": [
+    "App.tsx",
+    "Screens",
+    "components",
+    "Styles",
+    "public",
+    "Backend"
+  ]
+}
